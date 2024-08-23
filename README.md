@@ -28,3 +28,9 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
    - Introduction to container orchestration.
    - Setting up a Docker Swarm cluster.
    - Deploying and managing services in a Swarm environment.
+  
+## Contributing
+Contributions are welcome! Please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
+
+## Contact
+For any inquiries or questions, feel free to contact me at mohamedaziz.bchini@insat.ucar.tn .
