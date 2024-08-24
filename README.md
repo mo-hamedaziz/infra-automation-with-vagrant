@@ -4,6 +4,9 @@
 
 This repository is a comprehensive guide to setting up and managing a DevOps environment using various tools and technologies. It covers the entire process of automating infrastructure using Vagrant, managing server configurations with Ansible, containerizing applications using Docker, and orchestrating containers with Docker Swarm.
 
+### Diagram
+![image](https://github.com/user-attachments/assets/6c1c8469-13a7-4323-8d51-ba24348e5a67)
+
 ## Prerequisites
 - [Vagrant](https://www.vagrantup.com/downloads)
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
