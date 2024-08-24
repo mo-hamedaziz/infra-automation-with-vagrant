@@ -12,6 +12,10 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Project phases
+### Diagram
+![image](https://github.com/user-attachments/assets/25843ad2-871e-4b85-b0a2-a4c33e43fbb4)
+
+### Steps
 1. Vagrant/VirtualBox Setup
    - Introduction to Vagrant and VirtualBox.
    - Setting up and configuring virtual machines using Vagrant.
