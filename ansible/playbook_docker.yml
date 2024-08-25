@@ -1,15 +1,17 @@
 - hosts: nodes
-  become: yes
+  become: yes # To become sudo user
   tasks:
   - name: ensure docker is installed
     apt:
       name: docker.io
       state: latest
+      upadate_cache: yes
       
   - name: ensure docker-compose is installed
     apt:
       name: docker-compose
       state: latest
+      upadate_cache: yes
 
   - name: Added user to docker group
     user:

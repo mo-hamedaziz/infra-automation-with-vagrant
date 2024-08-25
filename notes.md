@@ -14,5 +14,5 @@ The ping command is now working successfully
 8. To login to one of the nodes (node1 for example), we just need to run `ssh vagrant@node1`
 ![alt text](image-1.png)
 We are inside node1 VM
-9. In your host machines (project folder) create a directory called `ansible/`. Within that directory, create two files: `myhosts` (that will be our inventory file) and `playbook_docker.yml` (that will be our main playbook for this project)
+9. In your host machines (project folder) create a directory called `ansible/`. Within that directory, create two files: `myhosts` (that will be our inventory file) and `playbook_docker.yml` (that will be our main playbook for this project).
 10. Populate the two files
