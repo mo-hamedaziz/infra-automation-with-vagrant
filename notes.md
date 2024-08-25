@@ -15,4 +15,8 @@ The ping command is now working successfully
 ![alt text](image-1.png)
 We are inside node1 VM
 9. In your host machines (project folder) create a directory called `ansible/`. Within that directory, create two files: `myhosts` (that will be our inventory file) and `playbook_docker.yml` (that will be our main playbook for this project).
-10. Populate the two files
+10. Add host groups and hosts to `ansible/myhosts` file, and add define tasks in the `ansible/playbook_docker.yml` file.
+11. To make sure basic ansible connectivity is working without running the playbook, we need to run an ad-hoc ansible command. In our case, we'll run this command `ansible nodes -i /vagrant/ansible/myhosts -m command -a hostname`
+    - But first, we need to install ansible in our control VM.
+
+The ad-hoc command was successful
