@@ -1,9 +1,9 @@
 - hosts: nodes
   become: yes # To become sudo user
   tasks:
-  - name: install python-simplejson
+  - name: install python3-simplejson
     apt:
-      name: python-simplejson
+      name: python3-simplejson
       state: latest
       update_cache: yes
 
