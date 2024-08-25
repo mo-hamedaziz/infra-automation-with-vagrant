@@ -33,4 +33,14 @@
     1.  from the control VM, run `ssh vagrant@node1`.
     2.  Yes docker was installed successfully.
         ![alt text](img/image-6.png)
-14. 
+14. Create the `app.py` file.
+15. Create the `requirements.txt` file.
+16. Create `Dockerfile` and `docker-compose.yml` files.
+17. Populate all the previously mentionned files (4 files)
+18. Login to node1 (through ssh) and run the container in detach mode. To do so, you can run this command `docker compose -f /vagrant/docker-compose.yml up -d`.
+    - When running the container for the very first time, it will automatically build the docker image first using the `Dockerfile`.
+19. On you host pc, go to the browser and type `<node1_ip_address>:5000`. If everything is working as planned u should get this page:
+    ![alt text](image.png)
+    And on our control VM, we run `curl node1:5000`
+    ![alt text](image-1.png)
+20. 
