@@ -46,3 +46,4 @@
 20. In your project directory, create a folder called `docker-swarm`
     1.  Create and populate a file called called `swarm.yml` that will be our playbook to setup swarm.
     2.  Create and populate a file called called `myhosts` that will be our inventory for that playbook.
+21. To setup swarm, run this command `ansible-playbook -i /vagrant/docker-swarm/myhosts -K /vagrant/docker-swarm/swarm.yml` (Remember: BECOME password is *vagrant*)
