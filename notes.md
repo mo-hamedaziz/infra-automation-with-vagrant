@@ -55,3 +55,4 @@
     2.  We need to build our flask web app docker image. use `docker build -t vagrant-project/flaskwebapp .`
     3.  Go to the `docker-swarm` directory and create and new `docker-compose.yml` that will have small changes from our initial /vagrant/docker-compose.yml file.
     4.  Run this command to start the web app on docker swarm: `docker stack deploy --compose-file docker-compose.yml myapp`. Make sure you are in the `docker-swarm` directory!
+    5.  To remove the newly created stack `myapp` you can use `docker stack rm myapp`

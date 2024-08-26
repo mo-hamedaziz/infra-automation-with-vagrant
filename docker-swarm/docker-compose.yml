@@ -1,5 +1,5 @@
 services:
   web:
-    image: vagrant-project/flaskwebapp
+    image: vagrant-project/flaskwebapp:1
     ports:
       - "5000:5000"
