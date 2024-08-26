@@ -49,5 +49,9 @@
 21. To setup swarm, run this command `ansible-playbook -i /vagrant/docker-swarm/myhosts -K /vagrant/docker-swarm/swarm.yml` (Remember: BECOME password is *vagrant*).
 22. To verify docker swarn was correctly setup on our nodes, we have to ssh login to one of the nodes (node1 for example) and run `sudo docker node ls`.
     ![alt text](img/image-9.png)
-    Brilliant!
-23. 
+    Brilliant! Node1 is indeed the manager.
+23. To run our application in the docker swarm, we need to:
+    1.  Shut down the running container in node1 using `docker compose down` command. Make sure you are in the directory where the `docker-compose.yml` file is!
+    2.  We need to build our flask web app docker image. use `docker build -t vagrant-project/flaskwebapp .`
+    3.  Go to the `docker-swarm` directory and create and new `docker-compose.yml` that will have small changes from our initial /vagrant/docker-compose.yml file.
+    4.  Run this command to start the web app on docker swarm: `docker stack deploy --compose-file docker-compose.yml myapp`. Make sure you are in the `docker-swarm` directory!
