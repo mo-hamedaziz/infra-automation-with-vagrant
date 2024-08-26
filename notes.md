@@ -40,7 +40,31 @@
 18. Login to node1 (through ssh) and run the container in detach mode. To do so, you can run this command `docker compose -f /vagrant/docker-compose.yml up -d`.
     - When running the container for the very first time, it will automatically build the docker image first using the `Dockerfile`.
 19. On you host pc, go to the browser and type `<node1_ip_address>:5000`. If everything is working as planned u should get this page:
-    ![alt text](image.png)
+    ![alt text](img/image-7.png)
     And on our control VM, we run `curl node1:5000`
-    ![alt text](image-1.png)
-20. 
+    ![alt text](img/image-8.png)
+20. In your project directory, create a folder called `docker-swarm`
+    1.  Create and populate a file called called `swarm.yml` that will be our playbook to setup swarm.
+    2.  Create and populate a file called called `myhosts` that will be our inventory for that playbook.
+21. To setup swarm, run this command `ansible-playbook -i /vagrant/docker-swarm/myhosts -K /vagrant/docker-swarm/swarm.yml` (Remember: BECOME password is *vagrant*).
+22. To verify docker swarn was correctly setup on our nodes, we have to ssh login to one of the nodes (node1 for example) and run `sudo docker node ls`.
+    ![alt text](img/image-9.png)
+    Brilliant! Node1 is indeed the manager.
+23. To run our application in the docker swarm, we need to:
+    1.  Shut down the running container in node1 using `docker compose down` command. Make sure you are in the directory where the `docker-compose.yml` file is!
+    2.  We need to build our flask web app docker image. use `docker build -t vagrant-project/flaskwebapp .`
+    3.  Go to the `docker-swarm` directory and create and new `docker-compose.yml` that will have small changes from our initial /vagrant/docker-compose.yml file.
+    4.  Run this command to start the web app on docker swarm: `docker stack deploy --compose-file docker-compose.yml myapp`. Make sure you are in the `docker-swarm` directory!
+    5.  To remove the newly created stack `myapp` you can use `docker stack rm myapp`.
+24. Remember, we're still in the node1 VM. After running the `docker stack services myapp` command, we can see that our app have just one single replica for now. What we gonna do is to scale up our application to 3 nodes. To do so, run this command: `docker service scale myapp_web=3`.
+    - Even if we just have 3 node VMs, we are not limited to just 3 replicas. We can have as much replicas as we want (6 for examples). Our only constraint is the VM computing power (cpu, memory, ...).
+    TADAAA!
+    ![alt text](img/image-10.png)
+    We can also run `docker service ps myapp_web` to see more details. That command output can actually show us that the load balancing is really working.
+    ![alt text](img/image-11.png)
+25. If we login to the control VM and run many `curl` command to the `node:5000`, we can see that each time the printed hostname is different. That is due to the load balancing.
+    ![alt text](img/image-12.png)
+    Same thing with the other nodes:
+    ![alt text](img/image-13.png)
+    If you want to control the load balancing between the nodes, you can use some tools like *nginx*.
+
