@@ -43,4 +43,6 @@
     ![alt text](img/image-7.png)
     And on our control VM, we run `curl node1:5000`
     ![alt text](img/image-8.png)
-20. 
+20. In your project directory, create a folder called `docker-swarm`
+    1.  Create and populate a file called called `swarm.yml` that will be our playbook to setup swarm.
+    2.  Create and populate a file called called `myhosts` that will be our inventory for that playbook.
