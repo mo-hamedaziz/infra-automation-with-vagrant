@@ -62,5 +62,9 @@
     ![alt text](img/image-10.png)
     We can also run `docker service ps myapp_web` to see more details. That command output can actually show us that the load balancing is really working.
     ![alt text](img/image-11.png)
-25. 
+25. If we login to the control VM and run many `curl` command to the `node:5000`, we can see that each time the printed hostname is different. That is due to the load balancing.
+    ![alt text](img/image-12.png)
+    Same thing with the other nodes:
+    ![alt text](img/image-13.png)
+    If you want to control the load balancing between the nodes, you can use some tools like *nginx*.
 
