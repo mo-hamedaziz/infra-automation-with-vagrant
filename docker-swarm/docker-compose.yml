@@ -3,3 +3,8 @@ services:
     image: vagrant-project/flaskwebapp:1
     ports:
       - "5000:5000"
+    networks:
+      - myapp_network
+
+networks:
+  myapp_network:

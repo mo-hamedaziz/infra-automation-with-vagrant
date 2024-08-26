@@ -55,4 +55,12 @@
     2.  We need to build our flask web app docker image. use `docker build -t vagrant-project/flaskwebapp .`
     3.  Go to the `docker-swarm` directory and create and new `docker-compose.yml` that will have small changes from our initial /vagrant/docker-compose.yml file.
     4.  Run this command to start the web app on docker swarm: `docker stack deploy --compose-file docker-compose.yml myapp`. Make sure you are in the `docker-swarm` directory!
-    5.  To remove the newly created stack `myapp` you can use `docker stack rm myapp`
+    5.  To remove the newly created stack `myapp` you can use `docker stack rm myapp`.
+24. Remember, we're still in the node1 VM. After running the `docker stack services myapp` command, we can see that our app have just one single replica for now. What we gonna do is to scale up our application to 3 nodes. To do so, run this command: `docker service scale myapp_web=3`.
+    - Even if we just have 3 node VMs, we are not limited to just 3 replicas. We can have as much replicas as we want (6 for examples). Our only constraint is the VM computing power (cpu, memory, ...).
+    TADAAA!
+    ![alt text](img/image-10.png)
+    We can also run `docker service ps myapp_web` to see more details. That command output can actually show us that the load balancing is really working.
+    ![alt text](img/image-11.png)
+25. 
+
