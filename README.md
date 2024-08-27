@@ -116,6 +116,22 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
 - **SSH into Control VM:** `vagrant ssh control`
 - **Stop VMs:** `vagrant halt`
 - **Destroy VMs:** `vagrant destroy`
+
+## Project structure
+
+.
+├── Vagrantfile
+├── hosts
+├── ansible/
+│   ├── myhosts
+│   └── playbook_docker.yml
+├── docker-compose.yml
+├── Dockerfile
+├── requirements.txt
+├── app.py
+└── docker-swarm/
+    ├── myhosts
+    └── swarm.yml
   
 ## Contributing
 Contributions are welcome! Please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
