@@ -119,20 +119,9 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
 
 ## Project structure
 
-.
-├── Vagrantfile
-├── hosts
-├── ansible/
-│   ├── myhosts
-│   └── playbook_docker.yml
-├── docker-compose.yml
-├── Dockerfile
-├── requirements.txt
-├── app.py
-└── docker-swarm/
-    ├── myhosts
-    └── swarm.yml
-  
+![image](https://github.com/user-attachments/assets/49e6af4b-6a9b-4461-8935-4f4227462569)
+
+
 ## Contributing
 Contributions are welcome! Please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
 
