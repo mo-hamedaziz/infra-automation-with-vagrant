@@ -110,7 +110,12 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
       ```
     - Test the load balancing by running multiple `curl` commands to `node1:5000`.
 
+## Usage
 
+- **Starting VMs:** `vagrant up`
+- **SSH into Control VM:** `vagrant ssh control`
+- **Stop VMs:** `vagrant halt`
+- **Destroy VMs:** `vagrant destroy`
   
 ## Contributing
 Contributions are welcome! Please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
