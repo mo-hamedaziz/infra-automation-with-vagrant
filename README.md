@@ -15,26 +15,102 @@ This repository is a comprehensive guide to setting up and managing a DevOps env
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Project phases
-### Diagram
 ![image](https://github.com/user-attachments/assets/25843ad2-871e-4b85-b0a2-a4c33e43fbb4)
 
-### Steps
-1. Vagrant/VirtualBox Setup
-   - Introduction to Vagrant and VirtualBox.
-   - Setting up and configuring virtual machines using Vagrant.
-   - Creating a Vagrantfile for automated VM setup.
-2. Managing Server Configuration with Ansible
-   - Introduction to Ansible and Configuration Management.
-   - Writing and running Ansible playbooks.
-   - Automating software installation, service configuration, and deployment processes.
-3. Containerizing Applications with Docker
-   - Introduction to Docker and containerization concepts.
-   - Building Docker images and managing containers.
-   - Using Docker Compose for multi-container applications.
-4. Container Orchestration with Docker Swarm
-   - Introduction to container orchestration.
-   - Setting up a Docker Swarm cluster.
-   - Deploying and managing services in a Swarm environment.
+## Installation
+
+1. **Install Vagrant and VirtualBox**
+   - Download and install Vagrant from the official [website](https://www.vagrantup.com/downloads).
+   - Download and install VirtualBox from the official [website](https://www.virtualbox.org/wiki/Downloads).
+
+2. **Create and Initialize the Vagrantfile**
+   - Create a `Vagrantfile` in your project directory.
+   - Ensure that the static IP addresses assigned to the VMs are within the subnet of the VirtualBox network interface.
+
+3. **Start the VMs**
+   - Run `vagrant up` in your CLI to bring up the VMs. This process might take some time as it involves downloading and setting up the box images.
+   - Use `vagrant halt` to turn off the VMs gracefully.
+   - Use `vagrant destroy` to remove the VMs.
+
+4. **SSH into the Control VM**
+   - Run `vagrant ssh control` to establish an SSH connection to the control VM. The default password is `vagrant`.
+
+5. **File Sharing**
+   - Files in the `/vagrant` directory inside the VM are shared with the host machine (project directory).
+
+6. **Configure /etc/hosts**
+   - Add the node hostnames and IP addresses to the `/etc/hosts` file to enable communication between the nodes. Copy the file using:
+     ```bash
+     sudo cp /vagrant/hosts /etc/hosts
+     ```
+   - Test the connectivity by pinging the other nodes.
+
+7. **Setup SSH Key Authentication**
+   - Run `ssh-keygen` to generate SSH key pairs.
+   - Distribute the keys using:
+     ```bash
+     ssh-copy-id node1
+     ssh-copy-id node2
+     ssh-copy-id node3
+     ```
+   - Login to the nodes using `ssh vagrant@node1`, `ssh vagrant@node2`, or `ssh vagrant@node3`.
+
+8. **Ansible Setup**
+   - Create an `ansible/` directory with the `myhosts` (inventory) and `playbook_docker.yml` (playbook) files.
+   - Install Ansible on the control VM.
+   - Test Ansible connectivity with:
+     ```bash
+     ansible nodes -i /vagrant/ansible/myhosts -m command -a hostname
+     ```
+
+9. **Deploy Docker with Ansible**
+   - Run the playbook to install Docker on the nodes:
+     ```bash
+     ansible-playbook -i /vagrant/ansible/myhosts -K /vagrant/ansible/playbook_docker.yml
+     ```
+   - The `BECOME` password is `vagrant`.
+
+10. **Verify Docker Installation**
+    - SSH into `node1` and verify Docker installation by running:
+      ```bash
+      docker --version
+      ```
+
+11. **Deploy the Flask Web Application**
+    - Create the `app.py`, `requirements.txt`, `Dockerfile`, and `docker-compose.yml` files in your project directory.
+    - SSH into `node1` and run:
+      ```bash
+      docker compose -f /vagrant/docker-compose.yml up -d
+      ```
+    - Access the application by navigating to `<node1_ip_address>:5000` in your browser or using `curl node1:5000` from the control VM.
+
+12. **Setup Docker Swarm**
+    - Create a `docker-swarm/` directory with `swarm.yml` (playbook) and `myhosts` (inventory).
+    - Run the playbook to set up Docker Swarm:
+      ```bash
+      ansible-playbook -i /vagrant/docker-swarm/myhosts -K /vagrant/docker-swarm/swarm.yml
+      ```
+
+13. **Deploy the Application in Docker Swarm**
+    - Scale down the existing application:
+      ```bash
+      docker compose down
+      ```
+    - Build the Docker image:
+      ```bash
+      docker build -t vagrant-project/flaskwebapp .
+      ```
+    - Deploy the stack:
+      ```bash
+      docker stack deploy --compose-file docker-compose.yml myapp
+      ```
+    - Scale the service:
+      ```bash
+      docker service scale myapp_web=3
+      ```
+    - Test the load balancing by running multiple `curl` commands to `node1:5000`.
+
+
   
 ## Contributing
 Contributions are welcome! Please fork the repository, create a new branch for your feature or bugfix, and submit a pull request.
